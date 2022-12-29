@@ -1,5 +1,4 @@
 # AntiAura-ESP
-https://github.com/joehot200/AntiAura-ESP
 
 **Greetings!**
 
@@ -15,3 +14,7 @@ If you'd like to tidy up some code, please feel free! There is also no config ye
 By default, AntiAura-ESP gets the material by simply checking the block using Block.getType(). 
 
 If AntiAura is installed, it will hook into the async ground checker of AntiAura using the API, getting blocks async & offloading CPU onto another thread.
+
+# Credit
+
+The EntityHider class is modified from aandk/dmulloy2's EntityHider class from somewhere.
