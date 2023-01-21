@@ -2,7 +2,7 @@ name: AntiAura-ESP
 main: joehot200.AntiAuraESP.AntiAuraESP
 author: joehot200
 website: www.spigotmc.org/resources/antiaura.1368/
-version: 0.3.0
+version: 0.3.1
 api-version: 1.13
 depend: [ProtocolLib]
 softdepend: [AntiAura]

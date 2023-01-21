@@ -14,6 +14,7 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -29,7 +30,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.NumberConversions;
 import org.bukkit.util.Vector;
 
-public class EntityHidingA implements Listener {
+public class EntityHidingA {
 
 	//This is where the REAL stuff happens.
 	//Should we separate this into different classes? Maybe! Who cares! It's open source now, why don't YOU do it?
@@ -39,9 +40,11 @@ public class EntityHidingA implements Listener {
 	//However, this is *not* 100% the same as v1, due to various upgrades.
 	//For example, this version will cast two rays that meet in the middle, optimising underground entities.
 
+	FileConfiguration getConfig(){
+		return AntiAuraESP.instance.config;
+	}
 
-
-	public HashMap<String, PlayerData> data = new HashMap<String, PlayerData>();
+	public ConcurrentHashMap<String, PlayerData> data = new ConcurrentHashMap<String, PlayerData>();
 	public PlayerData getPlayerData(Player p){
 		if (!data.containsKey(p.getName())){
 			data.put(p.getName(), new PlayerData(p));
@@ -100,15 +103,15 @@ public class EntityHidingA implements Listener {
 	public boolean USE_ANTIAURA_COMPATIBILITY = false;
 
 	@SuppressWarnings("deprecation")
-
 	public EntityHidingA(AntiAuraESP m) {
 		if (Bukkit.getServer().getPluginManager().getPlugin("AntiAura") != null){
 			Bukkit.getConsoleSender().sendMessage("[AntiAura-ESP] Successfully hooked into AntiAura!");
 			USE_ANTIAURA_COMPATIBILITY = true;
 			//16 * 4 = 64
-			AntiAuraAPI.AAPI.getAntiAuraAPI().setAsyncSnapshotRange(4);
+			AntiAuraAPI.AAPI.getAntiAuraAPI().setAsyncSnapshotRange(getConfig().getInt("StoreChunksDistance", 4));
 			Bukkit.getConsoleSender().sendMessage("[AntiAura-ESP] Performance will be improved.");
 		}
+		rayMode = getConfig().getInt("RayMode", 2);
 		instance = this;
 		hider = new EntityHider(m);
 		
@@ -259,10 +262,10 @@ public class EntityHidingA implements Listener {
 					{
 						boolean lS = false;
 						// pl.sendMessage("2");
-						if (en.getLocation(true).distance(dat.headLoc) > 64) {
+						if (en.getLocation(true).distance(dat.headLoc) > getConfig().getDouble("MaxRangeToCheck", 64)) {
 							// If distance > than reduced distance
 							// Then hide the entity
-							lS = false;
+							lS = !getConfig().getBoolean("HideOverMaxRange", true);
 						} else if (dat.headLoc.distance(en.getLocation(false)) <= 3
 								|| en.isGlowing || en.hasNametag) {
 							lS = true;
@@ -280,7 +283,7 @@ public class EntityHidingA implements Listener {
 
 
 							}
-							if (false /*checkConfig.getBoolean("HidePlayersBehind", false)*/) {
+							if (getConfig().getBoolean("HidePlayersBehind", false)) {
 								// Assume Vector a = your eye position and b = other's eye position.
 								final Location lo = dat.headLoc;
 								Location o;

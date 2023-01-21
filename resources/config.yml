@@ -1,0 +1,37 @@
+#Greetings!
+
+#After making changes to the configuration, it is recommended you restart the server.
+
+
+
+#Which ray mode to use?
+#Affects performance
+RayMode: 2
+#If entity is too far away, hide entity?
+#AntiAura-ESP only checks entities up to 64 blocks away for performance reasons. You can change this in the advanced section.
+HideOverMaxRange: true
+
+
+
+
+#---   Advanced section ---
+
+
+#Amount of chunks AntiAura stores (if using AntiAura)
+#Must correlate to (be greater than equivalent of) MaxRangeToCheck or greater.
+#e.g.: 4 * 16 = 64.
+StoreChunksDistance: 4
+#Max range to check for showing/hiding entities.
+MaxRangeToCheck: 64
+
+
+
+
+#---   The section you probably won't use ---
+
+
+#Hide players behind your head.
+#This means when hitting F5 twice (look behind) you won't be able to see entities.
+#Maybe useful for FPS servers?
+HidePlayersBehind: false
+
