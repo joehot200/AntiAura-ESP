@@ -10,7 +10,7 @@ AntiAura stopped blocking ESP because:
 3) There are "more important" hacks to block (e.g. combat, movement).
 4) Open-sourcing meaning you, the community, can help with bugfixes/updates! (For example: Want to block ChestESP? I have some old code for that!)
 
-If you'd like to tidy up some code, please feel free! There is also no config yet.... if you'd like to add one, please do!
+If you'd like to tidy up some code, please feel free! 
 
 
 By default, AntiAura-ESP gets the material by simply checking the block using Block.getType(). 
