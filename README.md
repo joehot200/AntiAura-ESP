@@ -19,4 +19,4 @@ If AntiAura is installed, it will hook into the async ground checker of AntiAura
 
 # Credit
 
-The EntityHider class is modified from aandk/dmulloy2's EntityHider class from somewhere.
+The EntityHider class is modified from aandk/dmulloy2's EntityHider class from somewhere. 
